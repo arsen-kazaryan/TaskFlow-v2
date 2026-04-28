@@ -20,3 +20,34 @@
   9. Добавление поиска и фильтрации
   10. Подключение к LocalStorage
 
+
+**Примерная структура файлов:**
+  ```
+  src/
+  app/
+    router/
+      index.jsx
+  layouts/
+    MainLayout.jsx
+  pages/
+    Dashboard.jsx
+    Projects.jsx
+    Board.jsx
+    Analytics.jsx
+    Settings.jsx
+  components/
+    Sidebar.jsx
+    Header.jsx
+  main.jsx
+  App.jsx
+
+  ```
+
+
+
+На этом этапе: 
+- App.jsx - карта маршрутов
+- MainLayout.jsx - рамка приложения
+- Outlet - пустое место внутри рамки
+- Home, Board, Projects - страницы, которые вставляются в это место
+*Папка Routes пока что пустая*
