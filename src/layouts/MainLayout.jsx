@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import './MainLayout.css'
 import Header from "../components/Header"
 import SideBar from "../components/SideBar"

@@ -47,6 +47,8 @@
   --cyan: #06b6d4;
   --teal: #14b8a6;
 
+  --white-hover:rgba(255, 255, 255, 0.138);
+
   /* Main project colors */
   --bg-main: var(--gray-50);
   --bg-white: var(--white);

@@ -1,20 +1,36 @@
 import './SideBar.css'
-import { Link } from "react-router-dom"
+import {  NavLink } from "react-router-dom"
 
 const SideBar = () => {
   return (
     <>
-      <div className="sidebar">
-        <h2 className="sidebar__title">TaskFlow</h2>
+      <aside className="sidebar">
+        <div className='sidebar__logo-container'>
 
+          <h2 className="sidebar__title">TaskFlow</h2>
+          <p className='sidebar__desc'>Team manager</p>
+        </div>
         <nav className="sidebar__link-list">
-          <Link to='/'>Home</Link>
-          <Link to='/board'>board</Link>
-          <Link to='/projects'>projects</Link>
-          <Link to='/analytics'>Analytics</Link>
-          <Link to='/settings'>settings</Link> {/*В дальнейшем надо использвовывать NavLink для отслеживания активного состояния */}
+          <NavLink className={({ isActive }) => 
+            isActive 
+          ? 'sidebar__link-item sidebar__link-item--active' 
+            : 'sidebar__link-item '} to='/'>Dashboard</NavLink>
+          <NavLink className={({ isActive }) => 
+            isActive 
+          ? 'sidebar__link-item sidebar__link-item--active' 
+            : 'sidebar__link-item '} to='/projects'>Projects</NavLink>
+          <NavLink className={({ isActive }) => 
+            isActive 
+          ? 'sidebar__link-item sidebar__link-item--active' 
+            : 'sidebar__link-item '} to='/analytics'>Analytics</NavLink>
+          <NavLink className={({ isActive }) => 
+            isActive 
+          ? 'sidebar__link-item sidebar__link-item--active' 
+            : 'sidebar__link-item '} to='/settings'>Settings</NavLink> {/*В дальнейшем надо использвовывать NavLink для отслеживания активного состояния */}
         </nav>
-      </div>
+
+        <button className='sidebar__btn'>+ New Project</button>
+      </aside>
     </>
   )
 }
