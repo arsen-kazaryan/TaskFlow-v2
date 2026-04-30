@@ -9,11 +9,13 @@ import MainLayout from './layouts/MainLayout'
 
 
 function App() {
-
+const toggleTheme =()=>{
+  document.documentElement.classList.toggle('dark')
+}
   return (
     <>
       <Routes>
-        <Route path='/' element={<MainLayout/>}>
+        <Route path='/' element={<MainLayout toggleTheme={toggleTheme}/>}>
           <Route index element={<Board/>}/>
           <Route path='analytics' element={<Analytics/>}/>
           <Route path='projects' element={<Projects/>}/>

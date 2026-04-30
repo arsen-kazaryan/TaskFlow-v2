@@ -3,12 +3,12 @@ import './MainLayout.css'
 import Header from "../components/Header"
 import SideBar from "../components/SideBar"
 
-const MainLayout = () => {
+const MainLayout = ({toggleTheme}) => {
   return (
     <div className="layout"> {/* layout- это общий каркас страницы, который повторяется на разных экранах  */}
       <SideBar/>
       <div className="page">
-        <Header/>
+        <Header toggleTheme={toggleTheme}/>
         <main className="content">
           <Outlet />
         </main>
