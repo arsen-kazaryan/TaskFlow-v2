@@ -113,7 +113,7 @@
 }
 
 .header__profile-role {
-  color: var(--text-muted);
+  color: var(--blue);
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
 }

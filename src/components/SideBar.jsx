@@ -1,7 +1,7 @@
 import './SideBar.css'
 import {  NavLink } from "react-router-dom"
 
-const SideBar = () => {
+const SideBar = ({openModal}) => {
   return (
     <>
       <aside className="sidebar">
@@ -29,7 +29,7 @@ const SideBar = () => {
             : 'sidebar__link-item '} to='/settings'>Settings</NavLink> {/*В дальнейшем надо использвовывать NavLink для отслеживания активного состояния */}
         </nav>
 
-        <button className='sidebar__btn'>+ New Project</button>
+        <button className='sidebar__btn' onClick={openModal}>+ New Project</button>
       </aside>
     </>
   )

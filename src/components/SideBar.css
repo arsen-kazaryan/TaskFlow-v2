@@ -1,7 +1,6 @@
 .sidebar{
   width: 240px ;
   padding: 5px 10px;
-  outline: 1px solid blue;
   background:var(--gradient-main) ;
   display: flex;
   flex-direction: column;
