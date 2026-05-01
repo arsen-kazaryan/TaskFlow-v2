@@ -14,7 +14,7 @@ const SideBar = ({openModal}) => {
           <NavLink className={({ isActive }) => 
             isActive 
           ? 'sidebar__link-item sidebar__link-item--active' 
-            : 'sidebar__link-item '} to='/'>Dashboard</NavLink>
+            : 'sidebar__link-item '} to='/'>Board</NavLink>
           <NavLink className={({ isActive }) => 
             isActive 
           ? 'sidebar__link-item sidebar__link-item--active' 

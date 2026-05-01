@@ -78,10 +78,3 @@
   --priority-medium: var(--gradient-orange);
   --priority-low: var(--gradient-green);
 }
-.dark {
-  --bg-main: #111827;
-  --bg-white: #1f2937;
-  --text-main: #f9fafb;
-  --text-muted: #9ca3af;
-  --border-main: #374151;
-}
