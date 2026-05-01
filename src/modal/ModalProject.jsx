@@ -12,7 +12,7 @@ const ModalProject = ({ onClose }) => {
           <p className="modal-project__content-title">Project name</p>
           <input type="text" className="modal-project__input" placeholder="Enter project name" />
           <p className="modal-project__content-title">Description</p>
-          <textarea type="text" className="modal-project__input" placeholder="Enter project description" />
+          <textarea className="modal-project__input" placeholder="Enter project description" />
         </div>
         <div className="modal-project__color-container">
           <p className="modal-project__content-title">🎨Choose Color</p>
