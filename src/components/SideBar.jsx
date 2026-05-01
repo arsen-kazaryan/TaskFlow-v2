@@ -9,10 +9,9 @@ const SideBar = () => {
 
         <nav className="sidebar__link-list">
           <Link to='/'>Home</Link>
-          <Link to='/board'>board</Link>
-          <Link to='/projects'>projects</Link>
+          <Link to='/projects'>Projects</Link>
           <Link to='/analytics'>Analytics</Link>
-          <Link to='/settings'>settings</Link> {/*В дальнейшем надо использвовывать NavLink для отслеживания активного состояния */}
+          <Link to='/settings'>Settings</Link>
         </nav>
       </div>
     </>
