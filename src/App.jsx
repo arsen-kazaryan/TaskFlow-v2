@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Board from './pages/Board'
 import Projects from './pages/Projects'
-import Settings from './pages/Settings'
+import Settings from "./pages/Settings/Settings";
 import Analytics from './pages/Analytics'
 import MainLayout from './layouts/MainLayout'
 
