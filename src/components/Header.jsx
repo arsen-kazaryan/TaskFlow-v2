@@ -1,6 +1,6 @@
 import './Header.css'
 
-const Header = () => {
+const Header = ({toggleTheme}) => {
   return (
     <header className='header'>
       <div className='header__search'>
@@ -13,7 +13,10 @@ const Header = () => {
 
       <div className='header__right'>
         <div className='header__actions'>
-          <button className='header__action-btn  header__action-btn--toggle-theme' type='button' >
+          <button className='header__action-btn  header__action-btn--toggle-theme' 
+          type='button'
+          onClick={toggleTheme}
+          >
             X
           </button>
           <button className='header__action-btn header__action-btn--notification' >

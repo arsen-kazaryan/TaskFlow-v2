@@ -5,7 +5,7 @@ import SideBar from "../components/SideBar"
 import { useState } from "react"
 import ModalProject from "../modal/ModalProject"
 
-const MainLayout = () => {
+const MainLayout = ({ toggleTheme }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
   const openModal = () => {
@@ -19,7 +19,7 @@ const MainLayout = () => {
     <div className="layout"> {/* layout- это общий каркас страницы, который повторяется на разных экранах  */}
       <SideBar openModal={openModal}/>
       <div className="page">
-        <Header />
+        <Header toggleTheme={toggleTheme} />
         <main className="content">
           <Outlet />
         </main>
