@@ -1,7 +1,7 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Board from './pages/Board'
+import Dashboard from './pages/Dashboard'
 import Projects from './pages/Projects'
 import Settings from './pages/Settings'
 import Analytics from './pages/Analytics'
@@ -27,12 +27,12 @@ function App() {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
   }
-
+  
   return (
     <>
       <Routes>
-        <Route path='/' element={<MainLayout toggleTheme={toggleTheme}/>}>
-          <Route index element={<Board/>}/>
+        <Route path='/' element={<MainLayout toggleTheme={toggleTheme} theme={theme}/>}>
+          <Route index element={<Dashboard/>}/>
           <Route path='analytics' element={<Analytics/>}/>
           <Route path='projects' element={<Projects/>}/>
           <Route path='settings' element={<Settings/>}/>

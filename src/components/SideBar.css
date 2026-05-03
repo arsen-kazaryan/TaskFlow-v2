@@ -1,11 +1,18 @@
 .sidebar{
-  width: 240px ;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  height: 100vh;
   padding: 5px 10px;
   background:var(--gradient-main) ;
   display: flex;
   flex-direction: column;
   gap: 20px;
   font-family: var(--font-main);
+  overflow-y: auto;
+  z-index: 1100;
 }
 .sidebar__title{
   color: var(--text-white);

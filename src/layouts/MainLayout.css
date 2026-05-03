@@ -4,10 +4,16 @@
   display: flex;
 }
 .page  {
-  width: 100%;
+  width: calc(100% - var(--sidebar-width));
+  margin-left: var(--sidebar-width);
   min-height: 100vh;
   background-color: var(--bg-main);
   color: var(--text-main);
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.content {
+  padding-top: var(--header-height);
+  min-height: 100vh;
 }
 
