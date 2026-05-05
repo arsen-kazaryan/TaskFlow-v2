@@ -1,11 +1,18 @@
 .sidebar{
-  width: 240px ;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  height: 100vh;
   padding: 5px 10px;
   background:var(--gradient-main) ;
   display: flex;
   flex-direction: column;
   gap: 20px;
   font-family: var(--font-main);
+  overflow-y: auto;
+  z-index: 1100;
 }
 .sidebar__title{
   color: var(--text-white);
@@ -58,7 +65,7 @@
   padding: 14px 18px;
   border: none;
   border-radius: var(--radius-xl);
-  background-color: var(--bg-white);
+  background-color: var(--white);
   color: var(--blue-hover);
   font-size: var(--text-md);
   font-weight: var(--weight-medium);
@@ -66,7 +73,7 @@
   cursor: pointer;
   transition: 0.1s ease;
   &:hover {
-    background-color: var(--gray-100);
+    background-color: #f3f4f6;
     color: var(--blue-hover);
     transform:scale(1.05);
   }

@@ -1,6 +1,8 @@
 import './Header.css'
+import toggleThemeIcon from '/icons/night-mode.png'
 
-const Header = () => {
+const Header = ({toggleTheme,theme}) => {
+  
   return (
     <header className='header'>
       <div className='header__search'>
@@ -13,8 +15,11 @@ const Header = () => {
 
       <div className='header__right'>
         <div className='header__actions'>
-          <button className='header__action-btn  header__action-btn--toggle-theme' type='button' >
-            X
+          <button className='header__action-btn  header__action-btn--toggle-theme' 
+          type='button'
+          onClick={toggleTheme}
+          >
+            <img src={toggleThemeIcon} alt="toggle-button"  className={`theme-icon ${theme === 'dark' ? 'theme-icon--rotated' : ''}`}/>
           </button>
           <button className='header__action-btn header__action-btn--notification' >
             N
