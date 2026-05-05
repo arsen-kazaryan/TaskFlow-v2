@@ -11,6 +11,8 @@ const SideBar = ({openModal}) => {
           <p className='sidebar__desc'>Team manager</p>
         </div>
         <nav className="sidebar__link-list">
+
+
           <NavLink className={({ isActive }) => 
             isActive 
           ? 'sidebar__link-item sidebar__link-item--active' 
@@ -27,6 +29,7 @@ const SideBar = ({openModal}) => {
             isActive 
           ? 'sidebar__link-item sidebar__link-item--active' 
             : 'sidebar__link-item '} to='/settings'>Settings</NavLink> {/*В дальнейшем надо использвовывать NavLink для отслеживания активного состояния */}
+
         </nav>
 
         <button className='sidebar__btn' onClick={openModal}>+ New Project</button>

@@ -1,12 +1,11 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Dashboard from './pages/Dashboard'
-import Projects from './pages/Projects'
-import Settings from "./pages/Settings/Settings";
+import Board from './pages/Board'
+import Projects from './pages/Projects/Projects'
+import Settings from './pages/Settings'
 import Analytics from './pages/Analytics'
 import MainLayout from './layouts/MainLayout'
-import { useEffect, useState } from 'react'
 
 
 function App() {
