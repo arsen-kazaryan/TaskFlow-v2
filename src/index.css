@@ -52,6 +52,8 @@
   /* Main project colors */
   --bg-main: var(--gray-50);
   --bg-white: var(--white);
+  --sidebar-width: 240px;
+  --header-height: 88px;
 
   --text-main: var(--gray-900);
   --text-muted: var(--gray-500);
@@ -77,4 +79,28 @@
   --priority-high: var(--gradient-red);
   --priority-medium: var(--gradient-orange);
   --priority-low: var(--gradient-green);
+}
+
+.dark {
+  --bg-main: #111827;
+  --bg-white: #1f2937;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --border-main: #374151;
+  --gray-100: #2b3546;
+  --gray-200: #364152;
+  --gray-700: #d1d5db;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
