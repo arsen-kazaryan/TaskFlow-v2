@@ -69,9 +69,13 @@ const Projects = () => {
     setShowAddForm(false)
   }
 
-  const getPriorityColor = (priority) => {
-    const colors = { high: '#FF6B6B', medium: '#FFD93D', low: '#6BCB77' }
-    return colors[priority] || '#999'
+  const getPriorityBadge = (priority) => {
+    const badges = {
+      high: { label: ' High', className: 'priority-high' },
+      medium: { label: 'Medium', className: 'priority-medium' },
+      low: { label: 'Low', className: 'priority-low' }
+    }
+    return badges[priority] || { label: priority, className: '' }
   }
 
   if (selectedProject) {
@@ -81,29 +85,32 @@ const Projects = () => {
       done: selectedProject.taskList.filter(t => t.status === 'done')
     }
 
-    const TaskCard = ({ task }) => (
-      <div className="task-card">
-        <div className="task-title">{task.title}</div>
-        <div className="task-description">{task.desc}</div>
-        <div className="task-tags">
-          <span className="priority-badge" style={{ backgroundColor: getPriorityColor(task.priority) }}>
-            {task.priority}
-          </span>
-          {task.tags.map((tag, idx) => (
-            <span key={idx} className="tag">#{tag}</span>
-          ))}
-        </div>
-        <div className="task-footer">
-          <div className="assignee">
-            <div className="avatar" style={{ backgroundColor: '#1F88FF' }}>
-              {task.assignee.avatar}
-            </div>
-            <span className="assignee-name">{task.assignee.name}</span>
+    const TaskCard = ({ task }) => {
+      const { label, className: priorityClass } = getPriorityBadge(task.priority)
+      return (
+        <div className="task-card">
+          <div className="task-title">{task.title}</div>
+          <div className="task-description">{task.desc}</div>
+          <div className="task-tags">
+            <span className={`priority-badge ${priorityClass}`}>
+              {label}
+            </span>
+            {task.tags.map((tag, idx) => (
+              <span key={idx} className="tag">#{tag}</span>
+            ))}
           </div>
-          <span className="due-date">📅 {task.dueDate}</span>
+          <div className="task-footer">
+            <div className="assignee">
+              <div className="avatar" style={{ backgroundColor: '#1F88FF' }}>
+                {task.assignee.avatar}
+              </div>
+              <span className="assignee-name">{task.assignee.name}</span>
+            </div>
+            <span className="due-date"> {task.dueDate}</span>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
 
     const Column = ({ status, tasks, statusLabel }) => (
       <div className="board-column">
@@ -140,7 +147,7 @@ const Projects = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <span className="filter-icon">⚙️</span>
+
           <select value={priority} onChange={(e) => setPriority(e.target.value)}>
             <option>All Priorities</option>
             <option>High</option>
@@ -225,7 +232,7 @@ const Projects = () => {
     <div className="projects-container">
       <div className="projects-header">
         <h1>Projects</h1>
-        <h3>🚀 Manage your team projects</h3>
+        <h3>Manage your team projects</h3>
       </div>
 
       <div className="projects-grid">
@@ -257,11 +264,11 @@ const Projects = () => {
                 <span className="info-text">{p.tasks.completed}/{p.tasks.total} tasks</span>
               </div>
               <div className="project-info">
-                <span className="info-icon">👥</span>
+                <span className="info-icon"></span>
                 <span className="info-text">{p.members}</span>
               </div>
               <div className="project-info">
-                <span className="info-icon">📅</span>
+                <span className="info-icon"></span>
                 <span className="info-text">Created {p.created}</span>
               </div>
             </div>
