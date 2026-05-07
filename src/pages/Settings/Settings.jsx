@@ -41,7 +41,8 @@ const Settings = () => {
               Upload a JSON file to restore your data
             </p>
           </div>
-          <button className="btn green">⬆ Import</button>
+          <button className="btn green">
+            <img src="/import.png" />Import</button>
         </div>
 
         <div className="divider" />

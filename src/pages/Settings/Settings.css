@@ -1,7 +1,6 @@
 body {
     margin: 0;
     font-family: "Segoe UI", sans-serif;
-    background: #f5f6f8;
 }
 
 .settings {
@@ -75,6 +74,11 @@ body {
 .green {
     background: #1db954;
     color: white;
+}
+
+.green img {
+    width: 20px;
+    margin-bottom: -4px;
 }
 
 .red {
