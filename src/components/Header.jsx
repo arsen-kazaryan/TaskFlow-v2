@@ -1,10 +1,40 @@
 import './Header.css'
+import toggleThemeIcon from '/icons/night-mode.png'
 
-const Header = () => {
+const Header = ({toggleTheme,theme}) => {
+  
   return (
-    <>
-      <h4 className='header'>Верхняя часть сайта</h4>
-    </>
+    <header className='header'>
+      <div className='header__search'>
+        <input
+          type='text'
+          className='header__input'
+          placeholder='Search tasks, projects...'
+        />
+      </div>
+
+      <div className='header__right'>
+        <div className='header__actions'>
+          <button className='header__action-btn  header__action-btn--toggle-theme' 
+          type='button'
+          onClick={toggleTheme}
+          >
+            <img src={toggleThemeIcon} alt="toggle-button"  className={`theme-icon ${theme === 'dark' ? 'theme-icon--rotated' : ''}`}/>
+          </button>
+          <button className='header__action-btn header__action-btn--notification' >
+            N
+          </button>
+        </div>
+
+        <div className='header__profile'>
+          <div className='header__profile-avatar'>JD</div>
+          <div className='header__profile-info'>
+            <p className='header__profile-name'>John Doe</p>
+            <span className='header__profile-role'>Admin</span>
+          </div>
+        </div>
+      </div>
+    </header>
   )
 }
 
