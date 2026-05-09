@@ -1,8 +1,11 @@
+import { useThemeStore } from '../store/themeStore'
 import './Header.css'
 import toggleThemeIcon from '/icons/night-mode.png'
 
-const Header = ({toggleTheme,theme}) => {
-  
+const Header = () => {
+  const theme = useThemeStore((state) => state.theme)
+  const toggleTheme = useThemeStore((state) => state.toggleTheme)
+
   return (
     <header className='header'>
       <div className='header__search'>
