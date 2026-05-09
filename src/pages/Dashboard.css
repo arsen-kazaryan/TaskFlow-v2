@@ -195,6 +195,30 @@
   background-color: #13c97a;
 }
 
+.dashboard__project-dot--purple {
+  background-color: var(--purple);
+}
+
+.dashboard__project-dot--yellow {
+  background-color: yellow;
+}
+
+.dashboard__project-dot--red {
+  background-color: #f87171;
+}
+
+.dashboard__project-dot--cyan {
+  background-color: var(--cyan);
+}
+
+.dashboard__project-dot--rose {
+  background-color: rosybrown;
+}
+
+.dashboard__project-dot--orange {
+  background-color: var(--orange);
+}
+
 .dashboard__project-title,
 .dashboard__deadline-title,
 .dashboard__priority-title {

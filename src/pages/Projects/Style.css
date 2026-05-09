@@ -590,3 +590,71 @@
   }
 }
 
+.dark .projects-container,
+.dark .board-container {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+.dark .project-card,
+.dark .task-card,
+.dark .add-task-panel,
+.dark .board-column,
+.dark .back-btn,
+.dark .search-box input,
+.dark .board-controls select,
+.dark .task-form input,
+.dark .task-form textarea,
+.dark .form-row select,
+.dark .form-row input {
+  background: var(--bg-white);
+  border-color: var(--border-main);
+  color: var(--text-main);
+}
+
+.dark .project-name,
+.dark .board-header h1,
+.dark .column-header h3,
+.dark .task-title,
+.dark .task-form h3 {
+  color: var(--text-main);
+}
+
+.dark .projects-header h3,
+.dark .project-description,
+.dark .progress-label,
+.dark .progress-percentage,
+.dark .project-info,
+.dark .board-header p,
+.dark .filter-icon,
+.dark .task-description,
+.dark .assignee-name,
+.dark .due-date,
+.dark .empty-state,
+.dark .search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+.dark .project-footer {
+  border-top-color: var(--border-main);
+}
+
+.dark .progress-bar {
+  background: var(--gray-200);
+}
+
+.dark .task-count {
+  background: var(--gray-200);
+  color: var(--gray-700);
+}
+
+.dark .btn-cancel {
+  background: var(--gray-100);
+  color: var(--text-main);
+}
+
+.dark .btn-cancel:hover,
+.dark .back-btn:hover {
+  background: var(--gray-200);
+}
+
