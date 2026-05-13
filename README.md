@@ -10,10 +10,10 @@ TaskFlow — учебное React-приложение для управлени
 - настроен `MainLayout` с общим каркасом приложения
 - подключен `react-router-dom`
 - реализованы основные маршруты:
-  - `/` — `Dashboard`
-  - `/projects` — `Projects`
-  - `/analytics` — `Analytics`
-  - `/settings` — `Settings`
+  - `/` - `Dashboard`
+  - `/projects` -`Projects`
+  - `/analytics` - `Analytics`
+  - `/settings` - `Settings`
 - sidebar и header вынесены в отдельные компоненты
 
 ### Интерфейс

@@ -7,14 +7,6 @@ const getPriorityColor = (priority) => {
   return colors[priority] || '#999'
 }
 
-const getProjectProgress = (completed, total) => {
-  if (total === 0) {
-    return 0
-  }
-
-  return Math.round((completed / total) * 100)
-}
-
 const getProjectColor = (colorClass) => {
   const colors = {
     'dashboard__project-dot--blue': '#1F88FF',
@@ -54,25 +46,33 @@ const TaskCard = ({ task }) => (
   </div>
 )
 
-const Column = ({ tasks, statusLabel }) => (
-  <div className="board-column">
-    <div className="column-header">
-      <h3>{statusLabel}</h3>
-      <span className="task-count">{tasks.length}</span>
+const Column = ({ tasks, statusLabel, priority }) => {
+  const visibleTasks = tasks.filter(
+    (task) =>
+      priority === 'All Priorities' ||
+      task.priority.toLowerCase() === priority.toLowerCase()
+  )
+
+  return (
+    <div className="board-column">
+      <div className="column-header">
+        <h3>{statusLabel}</h3>
+        <span className="task-count">{visibleTasks.length}</span>
+      </div>
+      <div className="tasks-list">
+        {visibleTasks.length === 0 ? (
+          <div className="empty-state">No tasks</div>
+        ) : (
+          visibleTasks.map((task) => <TaskCard key={task.id} task={task} />)
+        )}
+      </div>
     </div>
-    <div className="tasks-list">
-      {tasks.length === 0 ? (
-        <div className="empty-state">No tasks</div>
-      ) : (
-        tasks.map((task) => <TaskCard key={task.id} task={task} />)
-      )}
-    </div>
-  </div>
-)
+  )
+}
 
 const Projects = () => {
   const projects = useProjectStore((state) => state.projects)
-  const updateProjectTasks = useProjectStore((state) => state.updateProjectTasks)
+  const createTask = useProjectStore((state) => state.createTask)
   const [selectedProjectId, setSelectedProjectId] = useState(null)
   const [showAddForm, setShowAddForm] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
@@ -88,28 +88,11 @@ const Projects = () => {
     dueDate: ''
   })
 
-  const selectedProject = projects.find((project) => project.id === selectedProjectId)
-
-  const addTask = () => {
-    if (!formData.title.trim()) return
-    const nextTaskId =
-      selectedProject.taskList.length > 0
-        ? Math.max(...selectedProject.taskList.map((task) => task.id)) + 1
-        : 1
-
-    const newTask = {
-      id: nextTaskId,
-      title: formData.title,
-      desc: formData.desc,
-      priority: formData.priority,
-      status: formData.status,
-      tags: formData.tags.split(',').map((tag) => tag.trim()).filter((tag) => tag),
-      assignee: { name: formData.assignee, avatar: formData.assignee.charAt(0) },
-      dueDate: formData.dueDate
-    }
-
-    updateProjectTasks(selectedProjectId, [...selectedProject.taskList, newTask])
-
+  const resetBoardState = () => {
+    setShowAddForm(false)
+    setSearchTerm('')
+    setPriority('All Priorities')
+    setAssignee('All Assignees')
     setFormData({
       title: '',
       desc: '',
@@ -119,6 +102,38 @@ const Projects = () => {
       assignee: 'John Doe',
       dueDate: ''
     })
+  }
+
+  const openProject = (projectId) => {
+    resetBoardState()
+    setSelectedProjectId(projectId)
+  }
+
+  const closeProject = () => {
+    resetBoardState()
+    setSelectedProjectId(null)
+  }
+
+  const selectedProject = projects.find((project) => project.id === selectedProjectId)
+
+  const addTask = (event) => {
+    event?.preventDefault()
+
+    if (!formData.title.trim()) return
+
+    const newTask = {
+      title: formData.title,
+      desc: formData.desc,
+      priority: formData.priority,
+      status: formData.status,
+      tags: formData.tags.split(',').map((tag) => tag.trim()).filter((tag) => tag),
+      assignee: { name: formData.assignee, avatar: formData.assignee.charAt(0) },
+      dueDate: formData.dueDate
+    }
+
+    createTask({ projectId: selectedProjectId, task: newTask })
+
+    resetBoardState()
     setShowAddForm(false)
   }
 
@@ -127,10 +142,9 @@ const Projects = () => {
       const matchesSearch =
         task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         task.desc.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesPriority = priority === 'All Priorities' || task.priority === priority.toLowerCase()
       const matchesAssignee = assignee === 'All Assignees' || task.assignee.name === assignee
 
-      return matchesSearch && matchesPriority && matchesAssignee
+      return matchesSearch && matchesAssignee
     })
 
     const tasksByStatus = {
@@ -146,7 +160,7 @@ const Projects = () => {
             <h1>{selectedProject.title}</h1>
             <p>{selectedProject.description}</p>
           </div>
-          <button className="back-btn" onClick={() => setSelectedProjectId(null)}>Back</button>
+          <button className="back-btn" onClick={closeProject}>Back</button>
         </div>
 
         <div className="board-controls">
@@ -174,9 +188,9 @@ const Projects = () => {
 
         <div className="board-wrapper">
           <div className="board-grid">
-            <Column tasks={tasksByStatus.todo} statusLabel="To Do" />
-            <Column tasks={tasksByStatus.inProgress} statusLabel="In Progress" />
-            <Column tasks={tasksByStatus.done} statusLabel="Done" />
+            <Column tasks={tasksByStatus.todo} statusLabel="To Do" priority={priority} />
+            <Column tasks={tasksByStatus.inProgress} statusLabel="In Progress" priority={priority} />
+            <Column tasks={tasksByStatus.done} statusLabel="Done" priority={priority} />
           </div>
 
           <div className="add-task-panel">
@@ -185,7 +199,7 @@ const Projects = () => {
                 Add New Task
               </button>
             ) : (
-              <div className="task-form">
+              <form className="task-form" onSubmit={addTask}>
                 <h3>Create New Task</h3>
                 <input
                   type="text"
@@ -228,10 +242,10 @@ const Projects = () => {
                   />
                 </div>
                 <div className="form-buttons">
-                  <button className="btn-save" onClick={addTask}>Save Task</button>
-                  <button className="btn-cancel" onClick={() => setShowAddForm(false)}>Cancel</button>
+                  <button type="submit" className="btn-save">Save Task</button>
+                  <button type="button" className="btn-cancel" onClick={() => setShowAddForm(false)}>Cancel</button>
                 </div>
-              </div>
+              </form>
             )}
           </div>
         </div>
@@ -248,7 +262,7 @@ const Projects = () => {
 
       <div className="projects-grid">
         {projects.map((project) => (
-          <div key={project.id} className="project-card" onClick={() => setSelectedProjectId(project.id)} style={{ cursor: 'pointer' }}>
+          <div key={project.id} className="project-card" onClick={() => openProject(project.id)} style={{ cursor: 'pointer' }}>
             <div className="project-header">
               <div className="project-icon" style={{ backgroundColor: getProjectColor(project.colorClass) }}>
                 {project.title.charAt(0)}
@@ -262,17 +276,17 @@ const Projects = () => {
             <div className="project-progress-section">
               <div className="progress-label-row">
                 <span className="progress-label">Progress</span>
-                <span className="progress-percentage">{getProjectProgress(project.completed, project.total)}%</span>
+                <span className="progress-percentage">{project.progress}%</span>
               </div>
               <div className="progress-bar">
-                <div className="progress-fill" style={{ width: `${getProjectProgress(project.completed, project.total)}%` }}></div>
+                <div className="progress-fill" style={{ width: `${project.progress}%` }}></div>
               </div>
             </div>
 
             <div className="project-footer">
               <div className="project-info">
                 <span className="info-icon">Tasks</span>
-                <span className="info-text">{project.completed}/{project.total} tasks</span>
+                <span className="info-text">{project.tasks.completed}/{project.tasks.total} tasks</span>
               </div>
               <div className="project-info">
                 <span className="info-icon">Team</span>

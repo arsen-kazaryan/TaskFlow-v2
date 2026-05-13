@@ -14,4 +14,8 @@ export const useThemeStore = create((set) => ({
     set((state) => ({
       theme: state.theme === 'light' ? 'dark' : 'light',
     })),
+  resetTheme: () =>
+    set(() => ({
+      theme: 'light',
+    })),
 }))

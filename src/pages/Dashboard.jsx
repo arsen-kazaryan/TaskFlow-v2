@@ -7,22 +7,17 @@ const upcomingDeadlines = [
   { id: 3, title: 'Design app icon', assignee: 'Mike Johnson', date: '05.05.2026' },
 ]
 
-const getProjectProgress = (completed, total) => {
-  if (total === 0) {
-    return 0
-  }
-
-  return Math.round((completed / total) * 100)
-}
-
 const Dashboard = () => {
   const projects = useProjectStore((state) => state.projects)
-  const allTasks = projects.flatMap((project) => project.taskList ?? [])
+  const getDashboardStats = useProjectStore((state) => state.getDashboardStats)
+
+  const statsData = getDashboardStats(projects)
+
   const stats = [
-    { id: 1, value: allTasks.length, label: 'Total Tasks', color: 'blue', accent: 'dashboard__stat-card--blue' },
-    { id: 2, value: allTasks.filter((task) => task.status === 'inProgress').length, label: 'In Progress', color: 'yellow', accent: 'dashboard__stat-card--yellow' },
-    { id: 3, value: allTasks.filter((task) => task.status === 'done').length, label: 'Completed', color: 'green', accent: 'dashboard__stat-card--green' },
-    { id: 4, value: 1, label: 'Favorites', color: 'purple', accent: 'dashboard__stat-card--purple' },
+    { id: 1, value: statsData.total, label: 'Total Tasks', color: 'blue', accent: 'dashboard__stat-card--blue' },
+    { id: 2, value: statsData.inProgress, label: 'In Progress', color: 'yellow', accent: 'dashboard__stat-card--yellow' },
+    { id: 3, value: statsData.completed, label: 'Completed', color: 'green', accent: 'dashboard__stat-card--green' },
+    { id: 4, value: statsData.favorites, label: 'Favorites', color: 'purple', accent: 'dashboard__stat-card--purple' },
   ]
 
   return (
@@ -36,7 +31,6 @@ const Dashboard = () => {
         {stats.map((stat) => (
           <article key={stat.id} className={`dashboard__stat-card ${stat.accent}`}>
             <div className="dashboard__stat-head">
-              <span className="dashboard__stat-icon">{stat.icon}</span>
               <span className="dashboard__stat-ring" aria-hidden="true"></span>
             </div>
             <p className={`dashboard__stat-value dashboard__stat-value--${stat.color}`}>{stat.value}</p>
@@ -60,11 +54,11 @@ const Dashboard = () => {
                   <div className="dashboard__project-progress-bar">
                     <div
                       className="dashboard__project-progress-fill"
-                      style={{ width: `${getProjectProgress(project.completed, project.total)}%` }}
+                      style={{ width: `${project.progress}%` }}
                     ></div>
                   </div>
                   <span className="dashboard__project-progress-text">
-                    {project.completed}/{project.total}
+                    {project.tasks.completed}/{project.tasks.total}
                   </span>
                 </div>
               </article>
@@ -78,7 +72,7 @@ const Dashboard = () => {
 
             <article className="dashboard__priority-card">
               <h3 className="dashboard__priority-title">Design landing page</h3>
-              <p className="dashboard__priority-meta">John Doe - 30.04.2026</p>
+              <p className="dashboard__priority-meta">Arsen Kazaryan - 30.04.2026</p>
             </article>
           </section>
 
